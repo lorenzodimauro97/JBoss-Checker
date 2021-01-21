@@ -31,9 +31,15 @@ namespace JBoss_Checker
             //MessageBox.Show(InputText.Text);
             string[] Text = InputText.Text.Split("\r\n");
 
+            if(Text.Length <= 1 || csv?.Count == 0)
+            {
+                MessageBox.Show("CSV Non caricato o lista server non valida!", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             foreach (string s in Text)
             {
-                if (!s.Substring(0, 1).Contains("p")) continue;
+                if (s == string.Empty || !s.Substring(0, 1).Contains("p")) continue;
                 if (!csv.Any(x => x.Contains(s))) OutputBox.Text += $"{s}\n";
             }
         }
@@ -46,6 +52,12 @@ namespace JBoss_Checker
                 csv = new List<string>();
 
             var contents = File.ReadAllText(openFileDialog.FileName).Split('\n');
+
+            if(contents.Length <= 1)
+            {
+                MessageBox.Show("CSV non valido o vuoto!", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             
             foreach(string s in contents)
             {

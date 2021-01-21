@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>JBoss_Checker</RootNamespace>
     <UseWPF>true</UseWPF>
+    <StartupObject>JBoss_Checker.App</StartupObject>
+    <ApplicationIcon>download.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
