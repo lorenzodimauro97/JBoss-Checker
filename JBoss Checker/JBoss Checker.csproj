@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>JBoss_Checker</RootNamespace>
     <UseWPF>true</UseWPF>
     <StartupObject>JBoss_Checker.App</StartupObject>
     <ApplicationIcon>download.ico</ApplicationIcon>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>

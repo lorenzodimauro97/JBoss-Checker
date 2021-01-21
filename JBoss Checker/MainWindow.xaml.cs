@@ -1,19 +1,8 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace JBoss_Checker
 {
@@ -31,7 +20,7 @@ namespace JBoss_Checker
             //MessageBox.Show(InputText.Text);
             string[] Text = InputText.Text.Split("\r\n");
 
-            if(Text.Length <= 1 || csv?.Count == 0)
+            if (Text.Length <= 1 || csv?.Count == 0)
             {
                 MessageBox.Show("CSV Non caricato o lista server non valida!", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -47,21 +36,26 @@ namespace JBoss_Checker
         private void CSVImportButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV Files |*.csv";
             if ((bool)!openFileDialog.ShowDialog()) return;
 
-                csv = new List<string>();
+            csv = new List<string>();
 
             var contents = File.ReadAllText(openFileDialog.FileName).Split('\n');
 
-            if(contents.Length <= 1)
+            if (contents.Length <= 1)
             {
                 MessageBox.Show("CSV non valido o vuoto!", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
-            foreach(string s in contents)
+
+            foreach (string s in contents)
             {
                 var sarray = s.Split(",");
+
+                MessageBox.Show(sarray.Length.ToString());
+
+                if (sarray.Length < 2) continue;
 
                 csv.Add(sarray[1]);
 
