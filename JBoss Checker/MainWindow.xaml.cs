@@ -53,13 +53,13 @@ namespace JBoss_Checker
             {
                 var sarray = s.Split(",");
 
-                MessageBox.Show(sarray.Length.ToString());
-
                 if (sarray.Length < 2) continue;
 
                 csv.Add(sarray[1]);
 
             }
+
+            ServerLabel.Content = $"Server caricati in memoria: {contents.Length}";
         }
     }
 }
