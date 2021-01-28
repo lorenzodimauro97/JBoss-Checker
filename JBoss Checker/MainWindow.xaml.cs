@@ -41,7 +41,18 @@ namespace JBoss_Checker
 
             csv = new List<string>();
 
-            var contents = File.ReadAllText(openFileDialog.FileName).Split('\n');
+            var contents = System.Array.Empty<string>();
+
+            try
+            {
+                contents = File.ReadAllText(openFileDialog.FileName).Split('\n');
+            }
+
+            catch (IOException)
+            {
+                MessageBox.Show("Eccezione I/O! Impossibile aprire il CSV, verificare che non sia aperto in un altro programma!", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             if (contents.Length <= 1)
             {
@@ -56,7 +67,6 @@ namespace JBoss_Checker
                 if (sarray.Length < 2) continue;
 
                 csv.Add(sarray[1]);
-
             }
 
             ServerLabel.Content = $"Server caricati in memoria: {contents.Length}";
