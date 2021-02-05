@@ -31,6 +31,8 @@ namespace JBoss_Checker
                 if (s == string.Empty || !s.Substring(0, 1).Contains("p")) continue;
                 if (!csv.Any(x => x.Contains(s))) OutputBox.Text += $"{s}\n";
             }
+
+            if (OutputBox.Text == string.Empty) MessageBox.Show("Nessun server assente dalla lista!", "Attenzione!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void CSVImportButton_Click(object sender, RoutedEventArgs e)
@@ -60,16 +62,16 @@ namespace JBoss_Checker
                 return;
             }
 
+            var divisionFactor = contents[0].Split(",").Length;
+
             foreach (string s in contents)
             {
                 var sarray = s.Split(",");
 
-                if (sarray.Length < 2) continue;
-
-                csv.Add(sarray[1]);
+                foreach (string x in sarray) csv.Add(x);
             }
 
-            ServerLabel.Content = $"Server caricati in memoria: {contents.Length}";
+            ServerLabel.Content = $"Server caricati in memoria: {(csv.Count / divisionFactor) - 1}";
         }
     }
 }
